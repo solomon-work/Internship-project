@@ -1,0 +1,90 @@
+# Simple To-Do List Application in Python
+to_do_list = []
+can_do_list = {
+    "1": "Add tasks",
+    "2": "Mark completed tasks",
+    "3": "Postpone tasks",
+    "4": "Give priority to tasks"
+}
+
+def show():
+    print("You can do the following things:")
+    for key, value in can_do_list.items():
+        print(f"{key} : {value}")
+
+def add_tasks():
+    print("How many tasks do you want to add?:")
+    number_of_tasks = int(input())
+    for i in range(1, number_of_tasks + 1):
+        task = input(f"Task#{i}: ")
+        to_do_list.append(task)
+    print("You completed adding your tasks.")
+    
+def mark_tasks():
+    if to_do_list:  # Only proceed if there are tasks to mark
+        print("Which task do you want to mark as completed?")
+        for index, value in enumerate(to_do_list):
+            print(f"{index}. {value}")
+        task_to_mark = int(input("Enter task number to mark as completed: "))
+        if 0 <= task_to_mark < len(to_do_list):
+            completed_task = to_do_list.pop(task_to_mark)
+            print(f"Task '{completed_task}' has been marked as completed.")
+        else:
+            print("Invalid task number.")
+    else:
+        print("No tasks to mark.")
+
+def postpone_task():
+    if to_do_list:
+        print("Which task do you want to postpone?")
+        for index, value in enumerate(to_do_list):
+            print(f"{index}. {value}")
+        task_to_postpone = int(input("Enter task number to postpone: "))
+        if 0 <= task_to_postpone < len(to_do_list):
+            postponed_task = to_do_list[task_to_postpone]
+            print(f"Task '{postponed_task}' has been postponed.")
+        else:
+            print("Invalid task number.")
+    else:
+        print("No tasks to postpone.")
+
+def priority_tasks():
+    if to_do_list:
+        print("Which task do you want to give priority?")
+        for index, value in enumerate(to_do_list):
+            print(f"{index}. {value}")
+        task_to_priority = int(input("Enter task number to give priority: "))
+        if 0 <= task_to_priority < len(to_do_list):
+            prioritized_task = to_do_list[task_to_priority]
+            print(f"Task '{prioritized_task}' has been given priority.")
+        else:
+            print("Invalid task number.")
+    else:
+        print("No tasks to prioritize.")
+
+def main():
+    while True:
+        show()
+        print("\nCurrent tasks:", to_do_list)
+        print("\nWhat do you want to do? Choose 1 to 4:")
+        choice = input()
+        
+        if choice == "1":
+            add_tasks()
+        elif choice == "2":
+            mark_tasks()
+        elif choice == "3":
+            postpone_task()
+        elif choice == "4":
+            priority_tasks()
+        else:
+            print("Invalid input. Please select from 1 to 4.")
+        
+        # Ask if the user wants to continue or quit
+        continue_choice = input("Do you want to continue? (yes/no): ").lower()
+        if continue_choice != "yes":
+            print("Goodbye!")
+            break
+
+if __name__ == "__main__":
+    main()
